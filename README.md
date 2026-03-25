@@ -1,39 +1,20 @@
-# ESA CDSE STAC API Demo
+# CDSE STAC API — Exploration and Streaming Examples
 
-## Translation:
+A collection of Databricks notebooks demonstrating how to search for Earth Observation data via the [Copernicus Data Space Ecosystem (CDSE)](https://dataspace.copernicus.eu/) [STAC API](https://stac.dataspace.copernicus.eu/v1) and stream assets directly from S3 for further processing.
 
-ESA: [European Space Agency](https://www.esa.int/)  
-CDSE: [Copernicus Data Space Ecosystem](https://dataspace.copernicus.eu/)  
-STAC: [SpatioTemporal Asset Catalogs](https://stacspec.org/en)  
-API: [Application Programming Interface](https://en.wikipedia.org/wiki/API)
+> _The STAC specification is a common language to describe geospatial information, so it can more easily be worked with, indexed, and discovered._ — stacspec.org
 
-This repository contains example material demonstrating how to access Earth observation data using the European Space Agency's Copernicus Data Space Ecosystem (CDSE) SpatioTemporal Asset Catalog (STAC) API (https://stac.dataspace.copernicus.eu/v1).
+## Notebooks
 
->_The STAC specification is a common language to describe geospatial information, so it can more easily be worked with, indexed, and discovered._ - stacspec.org/en
-
-## Contents
-
-- **notebooks/**
-  - `stac_query_sentinel-2` — Databricks notebook that guides users through authenticating with CDSE, defining an area of interest, performing STAC searches, and constructing a datacube of assets for further processing or analysis.
-- **README.md** — Overview and usage instructions.
+- **`stac_query_sentinel-2`** — Walks through connecting to the CDSE STAC catalogue, exploring available collections, searching for Sentinel-2 L2A scenes by area of interest and cloud cover, inspecting search results and asset metadata, and streaming band data directly from S3 into a lazy `xarray.DataArray` ready for processing.
 
 ## Requirements
 
-- CDSE account with active S3 credentials  
-- Access to Databricks Secrets for securely storing access keys
+- CDSE account with active S3 credentials ([generate here](https://documentation.dataspace.copernicus.eu/APIs/S3.html))
+- Databricks workspace with a secret scope containing `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
 
 ## Getting Started
 
-1. [Clone the repository](https://learn.microsoft.com/en-us/azure/databricks/repos/git-operations-with-repos) into Databricks as a "Git folder".  
-2. Configure your secret scope containing:
-   - `AWS_ACCESS_KEY_ID`
-   - `AWS_SECRET_ACCESS_KEY`
-3. Run the notebook and follow in-notebook instructions to draw an AOI and retrieve data.
-
-## Further Development
-
-Future examples may include:
-- Loading data into xarray with `stackstac`  
-- Generating temporal composites or animations or training data for machine learning models
-- notebooks to demonstrate working with other types of data like synthetic aperture radar
-
+1. [Clone into Databricks](https://learn.microsoft.com/en-us/azure/databricks/repos/git-operations-with-repos) as a Git folder.
+2. Configure your Databricks secret scope with your CDSE S3 credentials.
+3. Run the notebook top to bottom, drawing an AOI on the map widget when prompted.
