@@ -1,0 +1,11 @@
+pystac-client
+stackstac
+folium
+geogif
+s3fs
+shapely
+rasterio
+xarray
+fsspec
+pandas
+python-dotenv
