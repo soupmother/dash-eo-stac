@@ -1,0 +1,42 @@
+<xarray.DataArray (band: 1, y: 10980, x: 10980)> Size: 241MB
+dask.array<open_rasterio-478c1525062b89759edf490d63411a38<this-array>, shape=(1, 10980, 10980), dtype=uint16, chunksize=(1, 1024, 1024), chunktype=numpy.ndarray>
+Coordinates:
+  * band         (band) int64 8B 1
+  * y            (y) float64 88kB 5.8e+06 5.8e+06 5.8e+06 ... 5.69e+06 5.69e+06
+  * x            (x) float64 88kB 4e+05 4e+05 4e+05 ... 5.097e+05 5.098e+05
+    spatial_ref  int64 8B 0
+Attributes:
+    scale_factor:  1.0
+    add_offset:    0.0
+
+CRS:   EPSG:32630
+Shape: (1, 10980, 10980)
+dtype: uint16
+
+OneDimensionalRaster: At least one of the clipped raster x,y coordinates has only one point.. Set allow_one_dimensional_raster=True to disable this error.
+---------------------------------------------------------------------------
+OneDimensionalRaster                      Traceback (most recent call last)
+File <command-7861665540762222>, line 5
+      2 nir = rioxarray.open_rasterio(nir_vsi, chunks={"x": 1024, "y": 1024}, lock=False)
+      4 nir_bng = nir.rio.reproject("EPSG:27700")
+----> 5 nir_aoi = nir_bng.rio.clip_box(minx=left, miny=bottom, maxx=right, maxy=top)
+      6 nir_data = nir_aoi.compute()
+      8 red_f = red_data.astype("float32")
+
+File /local_disk0/.ephemeral_nfs/envs/pythonEnv-a763b4a6-d12c-4c34-ace8-5dedf48dce7b/lib/python3.11/site-packages/rioxarray/raster_array.py:872, in RasterArray.clip_box(self, minx, miny, maxx, maxy, auto_expand, auto_expand_limit, crs, allow_one_dimensional_raster)
+    866         raise NoDataInBounds(
+    867             f"No data found in bounds.{_get_data_var_message(self._obj)}"
+    868         )
+    869     if not allow_one_dimensional_raster and (
+    870         cl_array.rio.width == 1 or cl_array.rio.height == 1
+    871     ):
+--> 872         raise OneDimensionalRaster(
+    873             "At least one of the clipped raster x,y coordinates"
+    874             " has only one point."
+    875             f"{_get_data_var_message(self._obj)}. "
+    876             "Set allow_one_dimensional_raster=True to disable this error."
+    877         )
+    879 # make sure correct attributes preserved & projection added
+    880 _add_attrs_proj(new_data_array=cl_array, src_data_array=self._obj)
+
+OneDimensionalRaster: At least one of the clipped raster x,y coordinates has only one point.. Set allow_one_dimensional_raster=True to disable this error.
